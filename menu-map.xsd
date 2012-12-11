@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="dados">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="info" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="info">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="menu" type="xs:string"/>
+                <xs:element name="url" type="xs:string"/>
+                <xs:element name="section" type="xs:string"/>
+                <xs:element name="new_column" type="xs:string"/>
+                <xs:element name="icon" type="xs:string"/>
+                <xs:element name="special_class" type="xs:string"/>
+                <xs:element name="target" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
