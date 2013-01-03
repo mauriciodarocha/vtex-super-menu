@@ -50,11 +50,11 @@ options:
                         success: function(data)
                         {
                             var result = data.match(/<dados([\S\s]*?)(.+)dados>/g);
-
+                            
                             if(result!=null)
                             {
                                 var result_ampersand_free = result[0].replace(/&(?!amp;)/g,"&amp;");
-                                window._xml_menu = _xml_menu.xml = _xml_menu.convert.StringtoXML(result_ampersand_free);
+                                _xml_menu.xml = _xml_menu.convert.StringtoXML(result_ampersand_free);
                                 // _xml_menu.xml = _xml_menu.convert.StringtoXML(result);
                                 _xml_menu.place.menu();
                             }
@@ -72,7 +72,7 @@ options:
                 {
                     var column;
                     _xml_menu.columns=[];
-                    jQuery(_xml_menu.xml).find("new_column:icontains('sim')").siblings("menu").each(function(ndx,item)
+                    jQuery(_xml_menu.xml).find("new_column:contains('sim')").siblings("menu").each(function(ndx,item)
                     {
                         column = jQuery(item).text();
                         if(!_xml_menu.columns.inArray(column))
@@ -91,7 +91,7 @@ options:
                 {
                     var section;
                     _xml_menu.sections=[];
-                    jQuery(_xml_menu.xml).find("section:icontains('sim')").siblings("menu").each(function(ndx,item)
+                    jQuery(_xml_menu.xml).find("section:contains('sim')").siblings("menu").each(function(ndx,item)
                     {
                         section = jQuery(item).text();
                         if(!_xml_menu.sections.inArray(section))
@@ -160,10 +160,10 @@ options:
                         var sets_done=[];
                         jQuery(_xml_menu.xml).find("menu").each(function(ndx,item)
                         {
-                            menu=jQuery(item).text();
                             url=jQuery(item).siblings("url").text()||"javascript:void(0)";
+                            menu=jQuery(item).text();
                             icon=jQuery(item).siblings("icon").text()||"";
-                            target=jQuery(item).siblings("target").text()||"_self";
+                            target=jQuery(item).siblings("target")||"_self";
                             if(icon!="")
                             {
                                 img = jQuery('<img/>').attr('src',icon);
@@ -175,7 +175,7 @@ options:
                             else
                                 a = jQuery('<a/>').attr('href',url).attr('target',target).html(menu);
 
-                            if(jQuery(item).siblings("new_column").text().toUpperCase()=="SIM"||ndx==0)
+                            if(jQuery(item).siblings("new_column").text()=="sim"||ndx==0)
                             {
                                 counter++;
                                 item_ndx=0;
@@ -183,7 +183,7 @@ options:
                                 dl=jQuery('<dl/>');
                             }
                             
-                            if(jQuery(item).siblings("section").text().toUpperCase()=="SIM")
+                            if(jQuery(item).siblings("section").text()=="sim")
                             {
                                 jQuery(container).find(menu_container).addClass("in");
                                 item_container = jQuery('<dt/>').addClass('menu-xml-item').addClass('menu-xml-item-'+item_ndx);
@@ -258,10 +258,7 @@ options:
         return _xml_menu.init(this);
     }
 })( jQuery );
-jQuery.expr[':'].icontains = function(a, i, m) {
-  return jQuery(a).text().toUpperCase()
-      .indexOf(m[3].toUpperCase()) >= 0;
-};
+
 Array.prototype.inArray = function(value)
 {
     // Returns true if the passed value is found in the array. Returns false if it is not.
