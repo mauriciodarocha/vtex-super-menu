@@ -74,7 +74,7 @@ configuration file:
                 },
                 config: function()
                 {
-                    var rows = _sm_plugin.data.split("\n");
+                    var rows = _sm_plugin.data.split("\r\n");
                     var list;
                     jQuery(rows).each(function(ndx,item){
                         list={};
@@ -152,7 +152,8 @@ configuration file:
                 },
                 fix: function(e)
                 {
-                    if(jQuery(e).hasClass('fixed')) return;
+                    if(jQuery(e).length<=0) return false;
+                    if(jQuery(e).hasClass('fixed')) return false;
                     
                     jQuery(e).addClass('fixed');
                     _parent = jQuery(e).parents('li').parents('div');
@@ -223,9 +224,7 @@ configuration file:
                         });
                     
                     if(_show){
-                        console.log("asdfasdf");
                         _submenu.parent().parent().addClass('active');
-                        console.log(_submenu);
                         // _sm_plugin.effect.mouseenter(_submenu);
                     }
                         
@@ -323,7 +322,6 @@ String.prototype.accentsTidy = function(){
     r = r.replace(new RegExp(/\W/g),"");
     return r;
 };
-
 Array.prototype.remove= function(){
     var what, a= arguments, L= a.length, ax;
     while(L && this.length){
@@ -334,7 +332,6 @@ Array.prototype.remove= function(){
     }
     return this;
 }
-
 if(!Array.prototype.indexOf){
     Array.prototype.indexOf= function(what, i){
         i= i || 0;
