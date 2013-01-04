@@ -89,7 +89,7 @@ configuration file:
                         _sm_plugin.urls.push(itens[2]);
                         _sm_plugin.menus.push(list);
                     });
-                    
+
                     _sm_plugin.set.menus();
                 },
                 menus: function()
@@ -121,6 +121,7 @@ configuration file:
                         }
                         jQuery(_ul).append(_li);
                     });
+
                     jQuery(_pm_container).empty().append(_ul);
                     
                     _sm_plugin.set.event.menu();
@@ -213,11 +214,11 @@ configuration file:
                 {
                     _submenu = jQuery(".sp-submenu-"+_menu);
                     if(!_submenu.is(':empty')) return;
-                    
+
                     jQuery(_submenu).vtex_xml_menu({
                             url:_url,
                             callback:function()
-                            { 
+                            {
                                 if(typeof _pm_settings.each=="function") 
                                     _pm_settings.each(_menu); // Argument is current menu.
                             }
@@ -297,7 +298,7 @@ configuration file:
             {
                 if(typeof console=="undefined") return;
                 
-                console.log(log);
+                console.debug(log);
             }
         }
         

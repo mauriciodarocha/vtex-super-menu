@@ -32,6 +32,7 @@ options:
             columns:[],
             sections:[],
             sets:null,
+            container:null,
             init: function(e)
             {
                 if(_xml_menu.check(e))
@@ -54,7 +55,7 @@ options:
                             if(result!=null)
                             {
                                 var result_ampersand_free = result[0].replace(/&(?!amp;)/g,"&amp;");
-                                window._xml_menu = _xml_menu.xml = _xml_menu.convert.StringtoXML(result_ampersand_free);
+                                _xml_menu.xml = _xml_menu.convert.StringtoXML(result_ampersand_free);
                                 // _xml_menu.xml = _xml_menu.convert.StringtoXML(result);
                                 _xml_menu.place.menu();
                             }
@@ -72,11 +73,17 @@ options:
                 {
                     var column;
                     _xml_menu.columns=[];
+
+                    column = jQuery(_xml_menu.xml).find("menu:first").text();
+                    _xml_menu.columns.push(column);
+
                     jQuery(_xml_menu.xml).find("new_column:icontains('sim')").siblings("menu").each(function(ndx,item)
                     {
                         column = jQuery(item).text();
-                        if(!_xml_menu.columns.inArray(column))
+                        if(!_xml_menu.columns.inArray(column)) //&&ndx>0)
+                        {
                             _xml_menu.columns.push(column);
+                        }
                     });
                     
                     _xml_menu.sets = _xml_menu.columns.length;
@@ -103,7 +110,7 @@ options:
                     var container_div;
                     jQuery(_xml_menu.columns).each(function(ndx,item){
                         container_div = jQuery('<div/>').addClass('menu-xml-container').addClass('menu-xml-container-'+ndx);
-                        jQuery(container).append(container_div);
+                        jQuery(_xml_menu.container).append(container_div);
                     });
                 },
                 sets: function(e)
@@ -185,7 +192,7 @@ options:
                             
                             if(jQuery(item).siblings("section").text().toUpperCase()=="SIM")
                             {
-                                jQuery(container).find(menu_container).addClass("in");
+                                jQuery(_xml_menu.container).find(menu_container).addClass("in");
                                 item_container = jQuery('<dt/>').addClass('menu-xml-item').addClass('menu-xml-item-'+item_ndx);
                             }
                             else
@@ -203,7 +210,7 @@ options:
                             
                             jQuery(item_container).append(a);
                             jQuery(dl).append(item_container);
-                            jQuery(container).find(menu_container).append(dl);
+                            jQuery(_xml_menu.container).find(menu_container).append(dl);
                         });
                         _xml_menu.set.sets(jQuery(menu_container).parent());
                         
@@ -223,7 +230,7 @@ options:
                 
                 if( _settings.url!=null ) // This checks if the url is set. Otherwise, nothing will happen.
                 {
-                    container = e;
+                    _xml_menu.container = e;
                     result = true;
                 } else {
                     _xml_menu.log("A URL is required to load menu.");
@@ -235,7 +242,7 @@ options:
             {
                 if(typeof console=="undefined") return;
                 
-                console.log(log);
+                console.debug(log);
             },
             convert:
             {
@@ -250,6 +257,7 @@ options:
                         var parser=new DOMParser();
                         var doc=parser.parseFromString(text,'text/xml');
                     }
+
                     return doc;
                 }
             }
