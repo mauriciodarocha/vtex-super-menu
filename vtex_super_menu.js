@@ -37,7 +37,8 @@ configuration file:
             callback:null, // callback after all menu done.
             collection_title: '',
             show_collection: false,
-            effect: false
+            effect: false,
+            selection: "ul > li > div"
         }, options);
         
         var _sm_plugin = {
@@ -238,8 +239,9 @@ configuration file:
                 },
                 collection: function(_menu,_url,_collection_url)
                 {
+                    var selection = _pm_settings.selection||"";
                     if(typeof _collection_url=="string" && _collection_url.replace(/^\s*([\S\s]*?)\s*$/, '$1')!="")
-                        jQuery(".sp-collection-container-"+_menu).load(_collection_url+" ul >li >div",function(){
+                        jQuery(".sp-collection-container-"+_menu).load(_collection_url+" "+selection,function(){
                             jQuery(".sp-collection-container-"+_menu+":not(':empty')").parent().addClass('active').parent().addClass('sp-collection-on');
 
                             if(_pm_settings.collection_title!=""&&jQuery(".sp-collection-container-"+_menu).parent().hasClass('active'))
