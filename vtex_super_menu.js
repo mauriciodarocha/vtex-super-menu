@@ -38,7 +38,8 @@ configuration file:
             collection_title: '',
             show_collection: false,
             effect: false,
-            selection: "ul > li > div"
+            selection: "ul > li > div",
+            shadow: 0
         }, options);
         
         var _sm_plugin = {
@@ -48,7 +49,7 @@ configuration file:
             init: function()
             {
                 if(_sm_plugin.check(_pm_container))
-                    _sm_plugin.load.dependency();
+                    _sm_plugin.load.dependencies();
             },
             set:
             {
@@ -160,7 +161,7 @@ configuration file:
                     jQuery(e).addClass('fixed');
                     _parent = jQuery(e).parents('li').parents('div');
                     _parent_w = jQuery(e).parents('li').parents('div').width();
-                    shadow_padding=3;
+                    shadow_padding=_pm_settings.shadow;
                     
                     this_offset_left = jQuery(e).offset().left;
                     if(_sm_plugin.get.browser()=="ie7")
@@ -184,7 +185,16 @@ configuration file:
             },
             load:
             {
-                dependency: function()
+                dependencies: function()
+                {
+                    if(typeof basket=="undefined")
+                        jQuery.getScript("/arquivos/basket.min.js",function(){
+                            _sm_plugin.load.vtex_xml_menu();
+                        });
+                    else
+                        _sm_plugin.load.vtex_xml_menu();
+                },
+                vtex_xml_menu: function()
                 {
                     if(typeof vtex_xml_menu=="undefined")
                         jQuery.getScript("/arquivos/vtex_xml_menu.js",function(){

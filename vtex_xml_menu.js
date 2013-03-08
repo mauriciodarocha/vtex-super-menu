@@ -40,15 +40,25 @@ options:
             },
             run: function()
             {
-                _xml_menu.load.xml();
+                _xml_menu.load.dependencies();
             },
             load:
             {
+                dependencies: function()
+                {
+                    if(typeof basket=="undefined")
+                        jQuery.getScript("/arquivos/basket.min.js",function(){
+                            _xml_menu.load.xml();
+                        });
+                    else
+                        _xml_menu.load.xml();
+                },
                 xml: function()
                 {
-                    jQuery.ajax({
-                        url: document.location.protocol+"//"+document.location.host+_settings.url,
-                        success: function(data)
+
+                    basket.require({
+                        url: document.location.protocol+"//"+document.location.host+_settings.url
+                    }).then(function(data)
                         {
                             var result = data.match(/<dados([\S\s]*?)(.+)dados>/g);
 
