@@ -38,7 +38,8 @@ configuration file:
             collection_title: '',
             show_collection: false,
             effect: false,
-            selection: "ul > li > div"
+            selection: "ul > li > div",
+            shadow: 0
         }, options);
         
         var _sm_plugin = {
@@ -75,7 +76,7 @@ configuration file:
                 },
                 config: function()
                 {
-                    var rows = _sm_plugin.data.split("\r\n");
+                    var rows = _sm_plugin.data.replace(/\r/g,"").split("\n");
                     var list;
                     jQuery(rows).each(function(ndx,item){
                         list={};
@@ -160,7 +161,7 @@ configuration file:
                     jQuery(e).addClass('fixed');
                     _parent = jQuery(e).parents('li').parents('div');
                     _parent_w = jQuery(e).parents('li').parents('div').width();
-                    shadow_padding=3;
+                    shadow_padding=_pm_settings.shadow;
                     
                     this_offset_left = jQuery(e).offset().left;
                     if(_sm_plugin.get.browser()=="ie7")
