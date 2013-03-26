@@ -27,13 +27,14 @@ O Super Menu gera os links através de um arquivo XML (uma tabela de links).
 Como base usaremos o arquivo menu-sample.xlsx.
 
 Esse arquivo possui 7 colunas
-1. menu - Texto que será exibido no site. Digitar sempre em maiusculas/minúsculas;
-2. url - Endereço do link;
-3. seção - Caracteriza o titulo de seção do menu, isso criará um link com marcação diferenciada. O padrão é não (vazio). Digite apenas sim (com letras minusculas), se for diferente do padrão;
-4. coluna nova - O padrão é não (vazio). Digite apenas sim (com letras minusculas), se for iniciar uma nova coluna;
-5. icone - URL do icone de cada link. Deixar em branco se não houver.
-6. "class" Caso seja necessário uma marcação especial de css. Deixar em branco se não houver.
-7. target - Atributo target do link
+
+* 1. menu - Texto que será exibido no site. Digitar sempre em maiusculas/minúsculas;
+* 2. url - Endereço do link;
+* 3. seção - Caracteriza o titulo de seção do menu, isso criará um link com marcação diferenciada. O padrão é não (vazio). Digite apenas sim (com letras minusculas), se for diferente do padrão;
+* 4. coluna nova - O padrão é não (vazio). Digite apenas sim (com letras minusculas), se for iniciar uma nova coluna;
+* 5. icone - URL do icone de cada link. Deixar em branco se não houver.
+* 6. "class" Caso seja necessário uma marcação especial de css. Deixar em branco se não houver.
+* 7. target - Atributo target do link
 
 
 
