@@ -76,7 +76,7 @@ configuration file:
                 },
                 config: function()
                 {
-                    var rows = _sm_plugin.data.replace(/\r/g,"").split("\n");
+                    var rows = _sm_plugin.data.replace(/\r\n/g,"\n").replace(/\r/g,"\n").split("\n");
                     var list;
                     jQuery(rows).each(function(ndx,item){
                         list={};
