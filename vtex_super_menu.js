@@ -79,6 +79,7 @@ configuration file:
                     var rows = _sm_plugin.data.replace(/\r\n/g,"\n").replace(/\r/g,"\n").split("\n");
                     var list;
                     jQuery(rows).each(function(ndx,item){
+                        if(item.length<=0) return true; // skip
                         list={};
                         item_clean = item.replace(/&amp;/g,'&');
                         itens = item_clean.split(";");
