@@ -7,21 +7,21 @@ purpose:    Build a menu from a configuration file and xmls. Also add a collecti
              
 use:
     jQuery("#container").vtex_super_menu({
-        url:"/menu/header"
+        url:"/arquivos/menu-configuracao.xml"
     });
     
 options:
-    url: "/menu/header" // Required. This is the path of the configuration file.
+    url: "/arquivos/menu-configuracao.xml" // Required. This is the path of the configuration file.
     mount: "all" // Default is 'all'. This option will load and mount 'all' options of the menus.
     
 
 *** The configuration must follow the sample below. ****
-Menu;/path/to/menu/xml;/path/to/collection;
+Menu;/url-for-the-menu;/path/to/menu/xml;/path/to/collection;
 
 configuration file: 
 
-    Alimentação;/menu/header/alimentacao;/menu/colecoes/alimentacao;
-    Bem Estar;/menu/header/bemestar;/menu/colecoes/bemestar;
+    Alimentação;/alimentacao;/menu/header/alimentacao;/menu/colecoes/alimentacao;
+    Bem Estar;/bem-estar;/menu/header/bemestar;/menu/colecoes/bemestar;
 
     
 */
