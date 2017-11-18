@@ -89,6 +89,7 @@ configuration file:
                         list.menu_url = _menu_url;
                         list.url = itens[2]||"";
                         list.collection_url = itens[3]||"";
+                        list.icon = itens[4]||"";
                         _sm_plugin.urls.push(itens[2]);
                         _sm_plugin.menus.push(list);
                     });
@@ -105,8 +106,17 @@ configuration file:
                         _url=item.url;
                         menu_url=item.menu_url;
                         _collection=item.collection_url;
-                        
-                        _a=jQuery('<a>').attr('role','link').addClass("sp-item").addClass("sp-item-"+ndx).addClass("sp-"+_menu).attr({'url':_url,'href':menu_url,'menu':_menu,'collection':_collection}).html(_text);
+                        _icon=item.icon;
+                        if(_icon!="")
+                        { 
+                          img = jQuery('<img/>').attr('src',_icon);
+                          span_img = jQuery('<span/>').addClass('_img');
+                          span = jQuery('<span/>').html(_text);
+                          jQuery(span_img).append(img);  
+                          _a=jQuery('<a>').attr('role','link').addClass("sp-item").addClass("sp-item-"+ndx).addClass("sp-"+_menu).attr({'url':_url,'href':menu_url,'menu':_menu,'collection':_collection}).append(span_img).append(span);
+                        }else{
+                          _a=jQuery('<a>').attr('role','link').addClass("sp-item").addClass("sp-item-"+ndx).addClass("sp-"+_menu).attr({'url':_url,'href':menu_url,'menu':_menu,'collection':_collection}).html(_text);
+                        }
                         jQuery(_li).append(_a);
                         
                         if(_url)
